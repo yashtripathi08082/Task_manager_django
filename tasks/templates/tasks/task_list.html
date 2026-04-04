@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task List</title>
+</head>
+<body>
+
+<h1>Task List</h1>
+
+<a href="/add/">Add New Task</a>
+
+<ul>
+{% for task in tasks %}
+    <li>
+        <strong>{{ task.title }}</strong><br>
+        {{ task.description }}<br>
+        Due: {{ task.due_date }}<br>
+        Status: {{ task.status }}<br>
+
+        <a href="/update/{{ task.id }}/">Edit</a> |
+        <a href="/delete/{{ task.id }}/">Delete</a>
+    </li>
+    <hr>
+{% endfor %}
+</ul>
+
+</body>
+</html>

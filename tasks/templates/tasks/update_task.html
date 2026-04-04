@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Task</title>
+</head>
+<body>
+
+<h1>Update Task</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Title:</label><br>
+    <input type="text" name="title" value="{{ task.title }}"><br><br>
+
+    <label>Description:</label><br>
+    <textarea name="description">{{ task.description }}</textarea><br><br>
+
+    <label>Due Date:</label><br>
+    <input type="date" name="due_date" value="{{ task.due_date }}"><br><br>
+
+    <label>Status:</label><br>
+    <input type="text" name="status" value="{{ task.status }}"><br><br>
+
+    <button type="submit">Update</button>
+</form>
+
+</body>
+</html>
