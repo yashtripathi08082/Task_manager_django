@@ -24,7 +24,7 @@ def task_page(request):
 def add_task_page(request):
     if request.method == 'POST':
 
-        # ✅ Case 1: JSON request (Postman)
+        #  Case 1: JSON request (Postman)
         if request.content_type == 'application/json':
             data = json.loads(request.body)
 
