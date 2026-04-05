@@ -199,7 +199,132 @@ DELETE /delete/<id>/
 
 ---
 
-##  Tech Stack
+##  Testing Setup (pytest)
+
+This project uses **pytest** for automated testing of API endpoints and UI.
+
+---
+
+##  Testing Requirements
+
+Install required packages:
+
+pip install pytest pytest-django
+
+
+---
+
+##  Test Structure
+
+tasks/
+│
+└── tests/
+    ├── __init__.py
+    └── test_tasks.py
+
+---
+
+##  pytest Configuration
+
+Create a file in root directory:
+
+📄 `pytest.ini`
+
+```ini
+
+[pytest]
+DJANGO_SETTINGS_MODULE = taskproject.settings
+python_files = tests.py test_*.py *_tests.py
+```
+
+---
+
+##  Running Tests
+
+Run tests using:
+
+```bash
+python -m pytest
+```
+
+---
+
+## What is Tested
+
+The following functionalities are covered:
+
+* Create Task (API)
+* Get Tasks (API)
+* Update Task (API)
+* Delete Task (API)
+* UI Page Load
+
+---
+
+## Example Output
+
+```bash
+collected 5 items
+.....
+5 passed in 1.2s
+```
+
+---
+
+## Important Notes
+
+* Do NOT use `pytest` directly if command not recognized
+  Use:
+
+  ```bash
+  python -m pytest
+  ```
+
+* Ensure you are running command from project root (where `manage.py` exists)
+
+* Tests run on a **temporary test database**, so your real data is safe
+
+---
+
+##  Common Issues & Fixes
+
+###  Error: settings not configured
+
+✔ Solution: Ensure `pytest.ini` exists with correct settings module
+
+---
+
+### Error: pytest not recognized
+
+✔ Solution:
+
+```bash
+python -m pip install pytest pytest-django
+```
+
+---
+
+### Error: import file mismatch
+
+✔ Solution:
+
+* Remove `tasks/tests.py`
+* Use only `tasks/tests/` folder
+
+---
+
+## Summary
+
+* pytest is used for automated testing
+* Tests simulate API requests using Django test client
+* Ensures all CRUD operations work correctly
+
+---
+
+
+---
+
+## Tech Stack
 
 * Django
 * SQLite (default database)
@@ -207,7 +332,7 @@ DELETE /delete/<id>/
 
 ---
 
-##  Notes
+## Notes
 
 * UI uses HTML forms (POST requests)
 * API uses JSON (POST/PUT/DELETE)
@@ -215,7 +340,7 @@ DELETE /delete/<id>/
 
 ---
 
-##  Author
+## Author
 
 * Yash Tripathi
 
