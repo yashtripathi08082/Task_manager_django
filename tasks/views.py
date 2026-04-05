@@ -4,6 +4,7 @@ from .models import Task
 import json
 from django.views.decorators.csrf import csrf_exempt
 
+
 # ---------------- TEMPLATE VIEWS ---------------- #
 
 # Show all tasks
@@ -87,11 +88,6 @@ def update_task_page(request, id):
     # ✅ Case 3: GET → show form
     return render(request, 'tasks/update_task.html', {'task': task})
 
-
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-from django.shortcuts import redirect
-from .models import Task
 
 @csrf_exempt
 def delete_task_page(request, id):
