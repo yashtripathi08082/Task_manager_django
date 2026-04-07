@@ -26,21 +26,32 @@ taskproject/
 │
 ├── manage.py
 ├── db.sqlite3
+├── README.md
+├── pytest.ini             
 │
 ├── taskproject/
+│   ├── __init__.py
 │   ├── settings.py
 │   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
 │
 └── tasks/
+    ├── __init__.py
     ├── admin.py
     ├── models.py
     ├── views.py
     ├── urls.py
+    │
     ├── templates/
-        └── tasks/
-            ├── task_list.html
-            ├── add_task.html
-            └── update_task.html
+    │   └── tasks/
+    │       ├── task_list.html
+    │       ├── add_task.html
+    │       └── update_task.html
+    │
+    └── tests/             
+        ├── __init__.py
+        └── test_tasks.py  
 ```
 
 ---
