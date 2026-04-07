@@ -99,14 +99,6 @@ def delete_task_page(request, id):
             'id': id
         })
 
-    # API using POST (optional fallback)
-    # elif request.method == 'POST' and 'application/json' in request.content_type:
-    #     task.delete()
-    #     return JsonResponse({
-    #         'message': 'Task deleted via API (POST)',
-    #         'id': id
-    #     })
-
     # Browser request (GET)
     task.delete()
     return redirect('/')

@@ -1,4 +1,4 @@
-# 📝 Django Task Manager
+#  Django Task Manager
 
 A simple **Task Manager Web Application** built using Django.
 This project supports both:
@@ -58,7 +58,7 @@ pip install django
 
 ---
 
-## ▶ How to Run the Project
+## How to Run the Project
 
 ### 1. Clone the Repository
 
@@ -228,7 +228,7 @@ tasks/
 
 Create a file in root directory:
 
-📄 `pytest.ini`
+`pytest.ini`
 
 ```ini
 
