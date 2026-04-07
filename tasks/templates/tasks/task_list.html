@@ -2,27 +2,60 @@
 <html>
 <head>
     <title>Task List</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 
-<h1>Task List</h1>
+<div class="container mt-5">
 
-<a href="/add/">Add New Task</a>
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>📋 Task List</h2>
+        <a href="/add/" class="btn btn-primary">+ Add Task</a>
+    </div>
 
-<ul>
-{% for task in tasks %}
-    <li>
-        <strong>{{ task.title }}</strong><br>
-        {{ task.description }}<br>
-        Due: {{ task.due_date }}<br>
-        Status: {{ task.status }}<br>
+    <!-- Task Cards -->
+    <div class="row">
+        {% for task in tasks %}
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
 
-        <a href="/update/{{ task.id }}/">Edit</a> |
-        <a href="/delete/{{ task.id }}/">Delete</a>
-    </li>
-    <hr>
-{% endfor %}
-</ul>
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.description }}</p>
+
+                    <p class="mb-1">
+                        📅 <strong>Due:</strong> {{ task.due_date }}
+                    </p>
+
+                    <p>
+                        🔄 <strong>Status:</strong> 
+                        <span class="badge 
+                            {% if task.status == 'Completed' %}
+                                bg-success
+                            {% else %}
+                                bg-warning text-dark
+                            {% endif %}
+                        ">
+                            {{ task.status }}
+                        </span>
+                    </p>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/update/{{ task.id }}/" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="/delete/{{ task.id }}/" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
 
 </body>
 </html>

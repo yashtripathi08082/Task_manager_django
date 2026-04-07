@@ -5,14 +5,12 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 
 
-# ---------------- TEMPLATE VIEWS ---------------- #
-
 # Show all tasks
 @csrf_exempt
 def task_page(request):
     tasks = Task.objects.all()
 
-    # ✅ Case 1: API request (Postman / JSON expected)
+    # API request (Postman / JSON expected)
     if request.headers.get('Accept') == 'application/json':
         tasks_data = list(tasks.values())
         return JsonResponse(tasks_data, safe=False)
@@ -25,7 +23,7 @@ def task_page(request):
 def add_task_page(request):
     if request.method == 'POST':
 
-        #  Case 1: JSON request (Postman)
+        # JSON request (Postman)
         if request.content_type == 'application/json':
             data = json.loads(request.body)
 
@@ -37,11 +35,11 @@ def add_task_page(request):
             )
 
             return JsonResponse({
-                'message': 'Task created via API',
+                'message': 'Task created',
                 'id': task.id
             })
 
-        # ✅ Case 2: Form request (Browser UI)
+        # Form request (Browser UI)
         else:
             Task.objects.create(
                 title=request.POST['title'],
@@ -52,7 +50,7 @@ def add_task_page(request):
 
             return redirect('/')
 
-    # GET request → show form
+
     return render(request, 'tasks/add_task.html')
 
 
@@ -60,7 +58,7 @@ def add_task_page(request):
 def update_task_page(request, id):
     task = Task.objects.get(id=id)
 
-    # ✅ Case 1: API (Postman - PUT request with JSON)
+    # API (Postman - PUT request with JSON)
     if request.method == 'PUT':
         data = json.loads(request.body)
 
@@ -71,11 +69,11 @@ def update_task_page(request, id):
         task.save()
 
         return JsonResponse({
-            'message': 'Task updated via API',
+            'message': 'Task updated',
             'id': task.id
         })
 
-    # ✅ Case 2: UI (HTML form - POST request)
+    # UI (HTML form - POST request)
     elif request.method == 'POST':
         task.title = request.POST['title']
         task.description = request.POST['description']
@@ -85,7 +83,7 @@ def update_task_page(request, id):
 
         return redirect('/')
 
-    # ✅ Case 3: GET → show form
+    # GET → show form
     return render(request, 'tasks/update_task.html', {'task': task})
 
 
@@ -93,23 +91,23 @@ def update_task_page(request, id):
 def delete_task_page(request, id):
     task = Task.objects.get(id=id)
 
-    # ✅ Case 1: API request (DELETE method)
+    # API request (DELETE method)
     if request.method == 'DELETE':
         task.delete()
         return JsonResponse({
-            'message': 'Task deleted via API',
+            'message': 'Task deleted',
             'id': id
         })
 
-    # ✅ Case 2: API using POST (optional fallback)
-    elif request.method == 'POST' and 'application/json' in request.content_type:
-        task.delete()
-        return JsonResponse({
-            'message': 'Task deleted via API (POST)',
-            'id': id
-        })
+    # API using POST (optional fallback)
+    # elif request.method == 'POST' and 'application/json' in request.content_type:
+    #     task.delete()
+    #     return JsonResponse({
+    #         'message': 'Task deleted via API (POST)',
+    #         'id': id
+    #     })
 
-    # ✅ Case 3: Browser request (GET)
+    # Browser request (GET)
     task.delete()
     return redirect('/')
 
